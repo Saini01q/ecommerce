@@ -1,38 +1,39 @@
 import React from 'react'
-import { useSelector ,useDispatch} from 'react-redux'
-import { NavLink,useNavigate } from 'react-router-dom'
-import {useState,useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { handleSearchProduct } from '../redux/product.slice';
 
 
 function Header() {
-  const { addedproducts,searchProduct} = useSelector(
+  const { addedproducts, searchProduct } = useSelector(
     (state) => state.productslice
   );
 
   const navigate = useNavigate()
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
 
-const [val, setVal] = useState("");
+  const [val, setVal] = useState("");
 
-function handleSearch(e) {
-const { value } = e.target;
+  function handleSearch(e) {
+    const { value } = e.target;
 
-if (e.key === "Enter") {
-setVal(value);
+    if (e.key === "Enter") {
+      setVal(value);
 
-navigate(`/search/?product=${val}`)
-dispatch(handleSearchProduct(val))
-console.log(searchProduct);
+      navigate(`/search/?product=${val}`)
+      dispatch(handleSearchProduct(val))
+      console.log(searchProduct);
 
 
-}}
-useEffect(()=>{
-  if(val !== "")
-  navigate(`/search/?product=${val}`)
+    }
+  }
+  useEffect(() => {
+    if (val !== "")
+      navigate(`/search/?product=${val}`)
   }, [val])
-  
-  
+
+
   console.log(val);
 
 
@@ -93,7 +94,7 @@ useEffect(()=>{
                   <i className="fas fa-search text-white" />
                 </div>
                 <input
-                onKeyDown={handleSearch}
+                  onKeyDown={handleSearch}
                   id="search"
                   name="search"
                   className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md leading-5 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:bg-gray-700 focus:border-custom sm:text-sm"
@@ -124,7 +125,9 @@ useEffect(()=>{
           </div>
         </div>{" "}
       </nav>
-    </header></div>
+    </header>
+    </div>
+
   )
 }
 
